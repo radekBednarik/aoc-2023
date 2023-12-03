@@ -14,3 +14,11 @@ export const sum = (numbers, initVal) => {
     return acc + val;
   }, initVal);
 };
+
+export const printAsParsed = (output) => {
+  try {
+    console.log(JSON.stringify(output, null, 2));
+  } catch (error) {
+    console.log(error);
+  }
+};
