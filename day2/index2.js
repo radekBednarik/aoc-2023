@@ -17,14 +17,11 @@ import { getInputText, sum } from "../common/common.js";
     for (const setGroup of setsGroups) {
       const rawSet = setGroup.split(",");
 
-      let _colour;
-      let _count;
-
       // one cube
       for (const cubeData of rawSet) {
         const [count, colour] = cubeData.trim().split(" ");
-        _count = count.trim();
-        _colour = colour.trim();
+        const _count = count.trim();
+        const _colour = colour.trim();
 
         if (!Object.prototype.hasOwnProperty.call(setsNumbers, _colour)) {
           setsNumbers[_colour] = [parseInt(_count)];
