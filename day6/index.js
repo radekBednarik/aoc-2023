@@ -1,38 +1,32 @@
 import { getInputText } from "../common/common.js";
 
+const parseDataLine = (line) => {
+  return line
+    .split(":")[1]
+    .trim()
+    .split(" ")
+    .filter((item) => {
+      return item !== "";
+    })
+    .map((item) => {
+      return parseInt(item.trim());
+    });
+};
+
+const computeAcceleration = (timePressed, accRatio = 1) => {
+  return timePressed * accRatio;
+};
+
+const computeDistance = (timePressed, maxTime) => {
+  const acc = computeAcceleration(timePressed);
+  return acc * (maxTime - timePressed);
+};
+
 (() => {
   const input = getInputText("day6/input.txt");
   const [times, distances] = input.split("\n");
-  const timeVals = times
-    .split(":")[1]
-    .trim()
-    .split(" ")
-    .filter((time) => {
-      return time !== "";
-    })
-    .map((time) => {
-      return parseInt(time.trim());
-    });
-
-  const distanceVals = distances
-    .split(":")[1]
-    .trim()
-    .split(" ")
-    .filter((dist) => {
-      return dist !== "";
-    })
-    .map((dist) => {
-      return parseInt(dist.trim());
-    });
-
-  const computeAcceleration = (timePressed, accRatio = 1) => {
-    return timePressed * accRatio;
-  };
-
-  const computeDistance = (timePressed, maxTime) => {
-    const acc = computeAcceleration(timePressed);
-    return acc * (maxTime - timePressed);
-  };
+  const timeVals = parseDataLine(times);
+  const distanceVals = parseDataLine(distances);
 
   let winCounts = [];
 
