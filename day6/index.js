@@ -40,10 +40,12 @@ import { getInputText } from "../common/common.js";
     let raceWinCount = 0;
 
     const time = timeVals[a];
+    const recordDistance = distanceVals[a];
+
     for (let i = 0; i <= time; i++) {
       const distance = computeDistance(i, time);
 
-      if (distance > distanceVals[a]) {
+      if (distance > recordDistance) {
         raceWinCount++;
       }
     }
