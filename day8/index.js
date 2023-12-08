@@ -10,6 +10,34 @@ import { getInputText } from "../common/common.js";
       return [line[0], line[1].replaceAll(/[()]/gm, "").split(", ")];
     });
 
-  console.log(navString);
-  console.log(list);
+  let next = "";
+
+  for (let i = 0; i < navString.length; i++) {
+    const navigation = navString[i];
+    console.log(navigation);
+    let index = 0;
+
+    if (navigation === "R") {
+      index = 1;
+    }
+
+    if (i === 0) {
+      next = list[0][1][index];
+      console.log(next);
+      continue;
+    }
+
+    next =
+      list[
+        list.filter((item) => {
+          const index = item.findIndex((item) => {
+            return item === next;
+          });
+
+          return index !== -1;
+        })
+      ];
+
+    console.log(next);
+  }
 })();
