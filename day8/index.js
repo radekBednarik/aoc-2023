@@ -1,5 +1,16 @@
 import { getInputText } from "../common/common.js";
 
+function getListLine(list, next) {
+  return list.filter((item) => {
+    const index = item.findIndex((item) => {
+      const result = item === next;
+      return result;
+    });
+
+    return index !== -1;
+  })[0];
+}
+
 (() => {
   const input = getInputText("day8/input.txt");
   const [navString, nodesString] = input.split("\n\n");
@@ -11,10 +22,14 @@ import { getInputText } from "../common/common.js";
     });
 
   let next = "";
+  let counter = 0;
 
   for (let i = 0; i < navString.length; i++) {
+    counter++;
     const navigation = navString[i];
+
     console.log(navigation);
+
     let index = 0;
 
     if (navigation === "R") {
@@ -23,21 +38,11 @@ import { getInputText } from "../common/common.js";
 
     if (i === 0) {
       next = list[0][1][index];
-      console.log(next);
       continue;
     }
 
-    next =
-      list[
-        list.filter((item) => {
-          const index = item.findIndex((item) => {
-            return item === next;
-          });
+    next = getListLine(list, next)[1][index];
 
-          return index !== -1;
-        })
-      ];
-
-    console.log(next);
+    console.log(next, counter);
   }
 })();
